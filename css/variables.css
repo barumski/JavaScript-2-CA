@@ -1,0 +1,33 @@
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body{
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+:root {
+  /* Colors */
+  --primary-color:#2D2D2D;
+  --secondary-color:#FAF9F6;
+  --tertiary-color:#191f2c;
+
+  /* Fonts */
+  --font-main: 'Rethink Sans', sans-serif;
+  --font-second: 'Roboto Flex', sans-serif;
+
+  
+  /* Font weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700; 
+  --font-weight-extrabold: 800;
+}
