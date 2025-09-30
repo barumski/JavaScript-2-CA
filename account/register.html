@@ -4,18 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script type="module" src="/scripts/auth/register.mjs"></script>
 </head>
+
+
 <body>
-  <h1>Welcome!</h1>
-  <form id="register-form">
-    <label for="name">Name</label>
-    <input name="name" id="name" required>
-    <label for="email">Email</label>
-    <input name="email" id="email" required>    
-    <label for="password">Password</label>
-    <input name="password" id="password" required>
-    <button>Submit</button>
-  </form>
+
+  <main>
+    <h1>Welcome!</h1>
+    <form id="register-form">
+      <label for="name">Name*</label>
+      <input name="name" id="name" required>
+      <label for="email">Email*</label>
+      <input name="email" id="email" required>    
+      <label for="password">Password*</label>
+      <input name="password" id="password" required>
+      <button>Submit</button>
+    </form>
+  </main>
 
   
 </body>
