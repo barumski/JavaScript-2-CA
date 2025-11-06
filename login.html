@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Document</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
   <script type="module" src="/scripts/auth/login.mjs"></script>
 </head>
 
@@ -11,17 +20,32 @@
 <body>
 
   <main>
-    <form id="login-form">
-      <label for="email">Email</label>
-      <input name="email" id="email">
-      <label for="password">Password</label>
-      <input name="password" id="password">
-      <button>Submit</button>
-    </form>
+
+    <div class="login">
+
+      <h1>Welcome Back!</h1>
+
+      <section>
+        <h2>Enter your email and password</h2>
+      </section>
+
+      <div class="login-form-container">
+        <form id="login-form">
+          <label for="email">Email:</label>
+          <input name="email" id="email">
+          <label for="password">Password:</label>
+          <input name="password" id="password">
+          <button>Submit</button>
+        </form>
+      </div>
+
+      <section>
+        <p>Click <a href="/account/register.html">here</a> to register</p>
+      </section>
+
+    </div>
   </main>
 
-  <section>
-    <p>Click <a href="/account/register.html">here</a> to register</p>
-  </section>
+
 </body>
 </html>
