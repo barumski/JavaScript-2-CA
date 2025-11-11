@@ -1,14 +1,8 @@
 import {AUTH_LOGIN_URL} from '../api/api.mjs';
+import { addToLocalStorage } from '../utilities/utilities.mjs';
 
 const loginForm = document.querySelector('#login-form');
 
-function addToLocalStorage(key, value) {
-  localStorage.setItem(key, value);
-}
-
-function getFromLocalStorage(key) {
-  return localStorage.getItem(key);
-}
 
 async function loginUser(userDetails) {
   try {

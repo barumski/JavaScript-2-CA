@@ -3,43 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Feed</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css">
 
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/header_footer.css"> 
+  <link rel="stylesheet" href="/css/post.css">
+
+  <!-- Scripts -->
+   <script type="module" src="/feed.mjs"></script>
 </head>
 
 
 <body>
 
   <header>
-    <div class="header-container">
-      <a href="/login.html">JavaScript 2 CA</a>
+    <a href="/login.html">JavaScript 2 CA</a>
       <div class="header-action">
-        <a href="/posts/create.html">Create post</a>
+        <a href="/account/profile.html">Profile</a>
         <a href="/login.html">Logout</a>
       </div>
-    </div>
   </header>
 
 
   <main>
     <section>
       <nav class="nav-links">
-        <a href="/feed.html">Home</a>
-        <a href="/posts/feed.html">Posts</a>
-        <a href="/account/profile.html">Profile</a>
+        <a href="/posts/feed.html">Home</a>
+        <a href="/posts/create.html">Create post</a>
+        <input class="search-bar" type="text" placeholder="Search posts...">    
       </nav>
     </section>
 
-    <section>
-      <h2>Posts</h2>
-      <div></div>
+    <h1>Welcome</h1>
+
+    <section class="post-grid-section">
+      <h2>Latest Posts</h2>
+      <div id="postContainer" class="post-container"></div>
     </section>
 
-    <button></button>
+    <button class=""></button>
 
   </main>
   <footer>

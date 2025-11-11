@@ -1,0 +1,67 @@
+@import url(/css/variables.css);
+
+
+/* Fonts */
+header, footer, .nav-links a {
+    font-family: var(--font-main);
+}
+
+header {
+    background-color: var(--background-color);
+    position: sticky;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: var(--tertiary-color);
+}
+
+header, footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 2rem;
+}
+
+.header-action a{
+    margin-left: 1.5rem;
+}
+
+header a, footer a, .footer-links {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-semibold);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    gap: 1.5rem;
+    background-color: var(--flag-color);
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-semibold);
+    margin-top: 0.3rem;
+}
+
+.search-bar {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    font-size: var(--font-size-base);
+    width: 100%;
+    max-width: 400px;
+}
+
+.footer-links {
+    padding: 2rem;
+}
+

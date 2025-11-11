@@ -16,11 +16,25 @@ body{
   /* Colors */
   --primary-color:#2D2D2D;
   --secondary-color:#FAF9F6;
-  --tertiary-color:#191f2c;
+  --tertiary-color:#181717;
+  --background-color:#070a29;
+  --email-link-color:#3B719F;
+  --edit-color:#02590F;
+  --delete-color:#870000;
+  --flag-color:#c7c1a7;
 
   /* Fonts */
   --font-main: 'Rethink Sans', sans-serif;
   --font-second: 'Roboto Flex', sans-serif;
+
+  /* Fonts sizes */
+  --font-size-base: 16px;
+  --font-size-small: 14px;
+  --font-size-hero: 96px;
+
+  --font-size-h1: 48px;
+  --font-size-h2: 24px;
+  --font-size-h3: 20px;
 
   
   /* Font weights */
