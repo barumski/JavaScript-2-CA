@@ -16,17 +16,17 @@
   <link rel="stylesheet" href="/css/post.css">
 
   <!-- Scripts -->
-   <script type="module" src="/feed.mjs"></script>
+   <script type="module" src="/scripts/feed.mjs"></script>
 </head>
 
 
 <body>
 
   <header>
-    <a href="/login.html">JavaScript 2 CA</a>
+    <a href="/posts/feed.html">JavaScript 2 CA</a>
       <div class="header-action">
         <a href="/account/profile.html">Profile</a>
-        <a href="/login.html">Logout</a>
+        <a href="#" id="logout">Logout</a>
       </div>
   </header>
 
@@ -36,15 +36,22 @@
       <nav class="nav-links">
         <a href="/posts/feed.html">Home</a>
         <a href="/posts/create.html">Create post</a>
-        <input class="search-bar" type="text" placeholder="Search posts...">    
+        <input class="search-bar" id="searchInput" type="text" placeholder="Search posts...">        
       </nav>
     </section>
 
     <h1>Welcome</h1>
 
-    <section class="post-grid-section">
+    <section class="banner-container">
       <h2>Latest Posts</h2>
-      <div id="postContainer" class="post-container"></div>
+      <div>
+        <button class="filter-btn">All Posts</button>
+        <button class="filter-btn">For You</button>
+      </div>
+    </section>
+
+    <section class="post-grid-section">
+      <div id="displayContainer" class="display-container"></div>
     </section>
 
     <button class=""></button>

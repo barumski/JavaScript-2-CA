@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/login_register.css">
 
   <!-- Scripts -->
   <script type="module" src="/scripts/auth/register.mjs"></script>
@@ -25,7 +25,7 @@
 
     <div class="register">
 
-      <h1>Welcome!</h1>
+      <h1>Register</h1>
 
       <section>
         <h2>Please fill in the form to register</h2>
@@ -34,12 +34,12 @@
       <div class="register-form-container">
         <form id="register-form">
           <label for="name">Name:</label>
-          <input name="name" id="name" required>
+          <input name="name" id="name" class="name" required>
           <label for="email">Email:</label>
-          <input name="email" id="email" required>    
+          <input name="email" id="email" class="email" required>    
           <label for="password">Password:</label>
-          <input name="password" id="password" required>
-          <button>Submit</button>
+          <input name="password" id="password" class="password" required>
+          <button class="submit-btn">Submit</button>
         </form>
       </div>
     </div>

@@ -1,5 +1,5 @@
 # JavaScript-2-CA
-JavaScript 2 Course Assingment by Jørn Andre Bærum 
+JavaScript 2 Course Assignment by Jørn Andre Bærum 
 
 smol.frog@stud.noroff.no
 
