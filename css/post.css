@@ -1,86 +1,58 @@
 @import url(/css/variables.css);
 
-body {
-    background: var(--secondary-color);
-}
-
-h1, h2 {
-    color: var(--primary-color);
-}
-
-h1 {
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-h1);
-    font-family: var(--font-second);
-    text-align: center;
-    margin-top: 15rem;
-    margin-bottom: 1rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-h2 {
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-h2);
-    font-family: var(--font-second);
-    text-align: left;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.banner-container {
+.post-card--single {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin-left: 21rem;
+    max-width: 900px;
+    margin: 15rem auto;
+    padding: 1.5rem;
 }
 
-.filter-btn
-{
-    background-color: white;
+.post-card--single .post-image {
+    width: 100%;
+    max-width: 500px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.post-card--single .post-title {
+    margin: 1rem 0 0.5rem;
+    font-family: var(--font-second);
+    font-size: var(--font-size-h1);
     color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+}
+
+.post-card--single .post-author {
+    margin: 0 0 1rem;
+    font-family: var(--font-second);
     font-size: var(--font-size-small);
-    cursor: pointer;
-    margin-right: 0.5rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-color);
+}
+
+.post-card--single .post-body {
+    font-family: var(--font-main);
+    font-size: var(--font-size-base);
+    color: var(--primary-color);
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.btn-back {
+    display: inline-block;
+    margin-top: 1.25rem;
+    padding: 0.5rem 2rem;
+    border: 1px solid var(--primary-color);
+    font-family: var(--font-second);
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--primary-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.filter-btn:hover {
+.btn-back:hover {
     background-color: var(--primary-color);
-    color: white;
-}
-
-.display-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.post-card {
-    background-color: var(--primary-color);
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--secondary-color);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.post-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
-
-.post-card h2 {
-    font-family: var(--font-main);
-    font-size: var(--font-size-base);
     color: var(--secondary-color);
-    line-height: 1.5;
 }
-

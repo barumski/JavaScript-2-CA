@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="/css/post.css">
 
   <!-- Scripts -->
+   <script type="module" src="/scripts/post.mjs"></script>
+   <script type="module" src="/scripts/ui.mjs"></script>
 </head>
 
 
@@ -25,7 +27,7 @@
     <a href="/login.html">JavaScript 2 CA</a>
       <div class="header-action">
         <a href="/account/profile.html">Profile</a>
-        <a href="/login.html">Logout</a>
+        <a href="#" id="logout">Logout</a>
       </div>
   </header>
 
@@ -39,10 +41,9 @@
       </nav>
     </section>
 
-    <section>
-      <h1>Post</h1>
-      <div></div>
-    </section>
+    <section class="post-single" id="singlePostContainer"></section>
+
+    <button class="to-top" id="toTopBtn" aria-label="Scroll to top"></button>
   </main>
 
 
