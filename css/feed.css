@@ -73,6 +73,7 @@ h2 {
     flex-direction: column;
     border: 1px solid var(--secondary-color);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
 }
 
 .post-card:hover {
@@ -99,6 +100,15 @@ h2 {
     font-family: var(--font-main);
     font-size: var(--font-size-base);
     color: var(--secondary-color);
+}
+
+.post-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-link:hover, .post-link:focus {
+    text-decoration: none;
 }
 
 .to-top {

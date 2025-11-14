@@ -66,13 +66,33 @@ header a:hover, footer a:hover, .nav-links a:hover {
     margin-top: 0.3rem;
 }
 
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
 .search-bar {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2.2rem 0.5rem 1rem;
     border: 1px solid var(--secondary-color);
     border-radius: 5px;
     font-size: var(--font-size-base);
     width: 100%;
     max-width: 400px;
+}
+
+.clear-search-btn {
+    position: absolute;
+    right: 0.5rem;
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.clear-search-btn:hover {
+    opacity: 1;
 }
 
 .footer-links {

@@ -40,6 +40,47 @@
     white-space: pre-wrap;
 }
 
+.post-actions {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.btn-edit,
+.btn-delete {
+    display: inline-block;
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    font-family: var(--font-second);
+    font-size: var(--font-size-base);
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.btn-edit:hover {
+    background-color: var(--email-link-color);
+    color: var(--secondary-color);  
+}
+
+.btn-delete {
+    background-color: var(--delete-color);
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.btn-delete:hover {
+    background-color: var(--primary-color);
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
 .btn-back {
     display: inline-block;
     margin-top: 1.25rem;

@@ -1,6 +1,9 @@
 import { NOROFF_API_KEY, POSTS_URL } from './api/api.mjs';
 import { getFromLocalStorage } from './utilities.mjs';
 import { logoutUser } from './auth/logout.mjs';
+import { setupPostSearch } from './search/search.mjs';
+
+let allPosts = [];
 
 function normalizeMediaUrl(url) {
   if (!url || typeof url !== 'string') return url;
@@ -125,6 +128,7 @@ function generatePosts(posts = []) {
     const authorName = post?.author?.name || post?.author?.username || 'Unknown Author';
     author.textContent = `By ${authorName}`;
 
+
     postContainer.append(img, title, author);
     link.append(postContainer);
     displayContainer.append(link);
@@ -133,7 +137,38 @@ function generatePosts(posts = []) {
 
 async function main() {
   const posts = await fetchPosts();
-  generatePosts(posts);
+  allPosts = posts;
+
+  const params = new URLSearchParams(window.location.search);
+  const urlQuery = params.get('search');
+
+  if (urlQuery) {
+    const lower = urlQuery.toLowerCase();
+
+    const filtered = allPosts.filter((post) => {
+      const title = (post?.title || '').toLowerCase();
+      const authorName = (
+        post?.author?.name ||
+        post?.author?.username ||
+        ''
+      ).toLowerCase();
+
+      return title.includes(lower) || authorName.includes(lower);
+    });
+
+    const searchInput = document.querySelector('#searchInput');
+    if (searchInput) {
+      searchInput.value = urlQuery;
+    }
+
+    generatePosts(allPosts); 
+  } else {
+    generatePosts(allPosts);
+  }
+  
+  setupPostSearch("#searchInput", allPosts, (filteredPosts) => {
+    generatePosts(filteredPosts);
+  });
 }
 
 main();

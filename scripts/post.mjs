@@ -1,10 +1,15 @@
 import { NOROFF_API_KEY, POSTS_URL } from "./api/api.mjs";
 import { getFromLocalStorage } from "./utilities.mjs";
-import { logoutUser } from "./auth/logout.mjs"; 
+import { logoutUser } from "./auth/logout.mjs";
+import { setupPostSearch } from './search/search.mjs';
+
+setupPostSearch('#searchInput', [], () => {});
 
 const container = document.getElementById('singlePostContainer');
 
 const accessToken = getFromLocalStorage('accessToken');
+const currentUser = getFromLocalStorage('userName');
+
 if (!accessToken) {
   console.warn('No access token found, redirecting to login page.');
   window.location.href = '../login.html';
@@ -20,7 +25,9 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
 
 if (!id) {
+    if (container) {
     container.textContent = 'No post ID provided';
+    }
     throw new Error('Missing ?id= in URL');
 }
 
@@ -52,7 +59,45 @@ async function fetchSinglePost(postId) {
     }
 }
 
+function isOwner(post) {
+    if (!currentUser || !post?.author) return false;
+    const authorName = post.author.name || post.author.username;
+    return authorName === currentUser;
+}
+
+async function deletePost(postId) {
+    const confirmed = window.confirm('Are you sure you want to delete this post?');
+    if (!confirmed) return;
+
+    try {
+        const response = await fetch(`${POSTS_URL}/${encodeURIComponent(postId)}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'X-Noroff-API-Key': NOROFF_API_KEY,
+        },
+    });
+
+    if (!response.ok);
+    const json = await response.json();
+    console.error('Failed to delete post:', json);
+    alert('Could not delete the post. Please try again');
+    return;
+
+    alert('Post deleted successfully.');
+    window.location.href = 'posts/feed.html';
+   }catch (error) {
+    console.error('Error deleting post:',error);
+    alert('An error occurred. Please try again');
+   }
+}
+
 function renderSinglePost(post) {
+    if (!container) {
+        console.error('singlePostContainer not found in DOM');
+        return;
+    }
+
     container.textContent = '';
 
     if (!post) {
@@ -81,14 +126,38 @@ function renderSinglePost(post) {
     body.classList.add('post-body');
     body.textContent = post?.body || '';
 
+    const actions = document.createElement('div');
+    actions.classList.add('post-actions');
+
     const backLink = document.createElement('a');
     backLink.href = '/posts/feed.html';
     backLink.classList.add('btn-back');
     backLink.textContent = '← Back';
 
-    article.append(img, title, author, body, backLink);
+    if (isOwner(post)) {
+        const editBtn = document.createElement('a');
+        editBtn.href = `/posts/edit.html?id=${post.id}`;
+        editBtn.classList.add('btn', 'btn-edit');
+        editBtn.textContent = 'Edit';
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.type = 'button';
+        deleteBtn.classList.add('btn', 'btn-delete');
+        deleteBtn.textContent = 'Delete';
+
+        deleteBtn.addEventListener('click', () => {
+            deletePost(post.id);
+        });
+
+        actions.append(editBtn, deleteBtn);
+        article.append(img, title, author, body, actions, backLink);
+       } else {
+        article.append(img, title, author, body, backLink);
+    }
+    
     container.append(article);
 }
+
 
 async function main() {
     const post = await fetchSinglePost(id);
