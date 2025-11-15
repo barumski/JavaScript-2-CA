@@ -1,4 +1,4 @@
-import { NOROFF_API_KEY, POSTS_URL } from "../api/api.mjs";
+import { NOROFF_API_KEY, POSTS_URL, PROFILES_URL } from "../api/api.mjs";
 import { getFromLocalStorage } from "../utilities.mjs";
 import { logoutUser } from "../auth/logout.mjs";
 import { setupPostSearch } from '../search/search.mjs';
@@ -123,7 +123,7 @@ function renderSinglePost(post) {
     const authorName = post?.author?.name || post?.author?.username || 'Unknown Author';
     author.textContent = `By ${authorName}`;
 
-    if (authorName !== ' Unkown Author') {
+    if (authorName !== ' Unknown Author') {
         author.classList.add('post-author--clickable');
         author.addEventListener('click', () => {
             window.location.href = `/posts/author.html?name=${encodeURIComponent(authorName)}`;
@@ -158,12 +158,113 @@ function renderSinglePost(post) {
         });
 
         actions.append(editBtn, deleteBtn);
-        article.append(img, title, author, body, actions, backLink);
        } else {
-        article.append(img, title, author, body, backLink);
+        if (authorName !== 'Unknown Author' && currentUser && authorName !== currentUser) {
+            const followBtn = document.createElement('button');
+            followBtn.type ='button';
+            followBtn.classList.add('btn', 'btn-follow');
+            followBtn.textContent = 'Follow';
+
+            setupFollowButton(followBtn, authorName);
+            actions.append(followBtn);
+        }
     }
-    
-    container.append(article);
+  if (actions.children.length > 0) {
+    article.append(img, title, author, body, actions, backLink);
+  } else {
+    article.append(img, title, author, body, backLink);
+  }
+
+  container.append(article);
+}
+
+async function fetchAuthorProfile(authorName) {
+    try {
+        const ult = `${PROFILES_URL}/${encodeURIComponent(authorName)}?_followers=true`;
+        const response = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'X-Noroff-API-Key': NOROFF_API_KEY,
+            },
+        });
+
+        const json = await response.json();
+
+        if (!response.ok) {
+            console.error('Failed to fetch author profile:', json);
+            return null;
+        }
+
+        return json.data;
+    }   catch (error) {
+        console.error('Error fetching author profile:', error);
+    }
+}
+
+async function isFollowingAuthor(authorName) {
+    if (!currentUser || !authorName) return false;
+
+    const profile = await fetchAuthorProfile(authorName);
+    const followers = profile?.followers;
+    if (!Array.isArray(followers)) return false;
+
+    return followers.some((follower) => follower.name === currentUser);
+}
+
+function setupFollowButton(button, authorName) {
+    if (!authorName || !currentUser || authorName === currentUser) {
+        button.style.display = 'none';
+        return;
+    }
+
+    let isFollowing = false;
+
+    const updateLabel = () => {
+        button.textContent = isFollowing ? 'Unfollow' : 'Follow';
+    };
+
+    const init = async () => {
+        button.disabled = true;
+        button.textContent = '...';
+        isFollowing = await isFollowingAuthor(authorName);
+        updateLabel();
+        button.disabled = false;
+    };
+
+    init();
+
+  button.addEventListener('click', async () => {
+    button.disabled = true;
+
+    const action = isFollowing ? 'unfollow' : 'follow';
+    const endpoint = `${PROFILES_URL}/${encodeURIComponent(authorName)}/${action}`;
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'X-Noroff-API-Key': NOROFF_API_KEY,
+        },
+      });
+
+
+      const json = await response.json();
+
+      if (!response.ok) {
+        console.error('Failed to toggle follow:', json);
+        alert('Could not update follow status. Please try again.');
+      } else {
+        isFollowing = !isFollowing;
+        updateLabel();
+      }
+    } catch (error) {
+      console.error('Error toggling follow:', error);
+      alert('An error occurred while updating follow status.');
+    } finally {
+      button.disabled = false;
+    }
+  });
 }
 
 

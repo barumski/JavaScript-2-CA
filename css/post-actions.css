@@ -112,3 +112,19 @@ h1 {
     border-color: var(--delete-color);
     color: var(--delete-color);
 }
+
+.btn-follow {
+    display: inline-block;
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    font-family: var(--font-second);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.btn-follow:hover {
+    background-color: var(--email-link-color);
+    color: var(--secondary-color);
+}
