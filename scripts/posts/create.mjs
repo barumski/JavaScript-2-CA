@@ -1,6 +1,9 @@
-import { NOROFF_API_KEY, POSTS_URL } from './api/api.mjs';
-import { getFromLocalStorage } from './utilities.mjs';
-import { logoutUser } from './auth/logout.mjs';
+import { NOROFF_API_KEY, POSTS_URL } from '../api/api.mjs';
+import { getFromLocalStorage } from '../utilities.mjs';
+import { logoutUser } from '../auth/logout.mjs';
+import { setupPostSearch } from '../search/search.mjs';
+
+setupPostSearch('#searchInput', [], () => {});
 
 const form = document.querySelector('#createPostForm');
 const message = document.querySelector('#createMessage');

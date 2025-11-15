@@ -6,17 +6,17 @@
 
   <title>Create Post</title>
 
-      <!-- Google Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="/css/header_footer.css"> 
-  <link rel="stylesheet" href="/css/post.css">
+  <link rel="stylesheet" href="/css/post-actions.css">
 
   <!-- Scripts -->
-   <script type="module" src="/scripts/create.mjs"></script>
+   <script type="module" src="/scripts/posts/create.mjs"></script>
 </head>
 
 
@@ -47,33 +47,35 @@
       </nav>
     </section>
 
-    <h1>Create post</h1>
 
-    <form id="createPostForm" class="create-form">
-      <label>
-        Title
-        <input type="text" name="title" required>
-      </label>
+    <section class="create-section">
+      <h1>Create post</h1>
+      <form id="createPostForm" class="create-form">
+        <label>
+          Title
+          <input type="text" name="title" class="title" required>
+        </label>
 
-      <label>
-        Body
-        <textarea name="body" rows="5"></textarea>
-      </label>
+        <label>
+          Body
+          <textarea name="body" rows="5" class="textarea"></textarea>
+        </label>
 
-      <label>
-        Image URL
-        <input type="url" name="mediaUrl" placeholder="https://example.com/image.jpg">
-      </label>
+        <label>
+          Image URL
+          <input type="url" name="mediaUrl" class="url" placeholder="https://example.com/image.jpg">
+        </label>
 
-      <label>
-        Image alt text
-        <input type="text" name="mediaAlt" placeholder="Describe the image">
-      </label>
+        <label>
+          Image alt text
+          <input type="text" name="mediaAlt" class="alt" placeholder="Describe the image">
+        </label>
 
-      <button type="submit">Publish</button>
-    </form>
+        <button type="submit">Publish</button>
+      </form>
 
-    <p id="createMessage" class="form-message"></p>
+      <p id="createMessage" class="form-message"></p>
+    </section>
   </main>
 
 

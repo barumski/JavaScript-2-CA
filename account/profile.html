@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="/css/profile.css">
 
   <!-- Scripts -->
+   <script type="module" src="/scripts/profile.mjs"></script>
 </head>
 
 
@@ -46,9 +47,34 @@
       </nav>
     </section>
 
-    <section>
-      <h1>Your name</h1>
-      <div></div>
+    <section class="profile-section">
+      <h1>My profile</h1>
+
+
+      <div class="profile-card">
+        <img id="profileAvatar" class="profile-avatar" src="" alt="Profile avatar">
+
+        <div class="profile-info">
+          <h2 id="profileName"></h2>
+          <p id="profileEmail" class="profile-email"></p>
+          <p id="profileBio" class="profile-bio"></p>
+
+          <div class="profile-stats">
+            <span id="profilePostsCount"></span>
+            <span id="profileFollowersCount"></span>
+            <span id="profileFollowingCount"></span>
+          </div>
+        </div>
+      </div>
+
+      <section class="profile-posts">
+        <h2>My posts</h2>
+        <div id="profilePostsContainer" class="display-container"></div>
+      </section>
+
+      <div class="profile-back-wrapper">
+        <a href="/posts/feed.html" class="btn-back">← Back</a>
+      </div>
     </section>
   </main>
 

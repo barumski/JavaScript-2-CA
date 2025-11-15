@@ -1,7 +1,7 @@
-import { NOROFF_API_KEY, POSTS_URL } from "./api/api.mjs";
-import { getFromLocalStorage } from "./utilities.mjs";
-import { logoutUser } from "./auth/logout.mjs";
-import { setupPostSearch } from './search/search.mjs';
+import { NOROFF_API_KEY, POSTS_URL } from "../api/api.mjs";
+import { getFromLocalStorage } from "../utilities.mjs";
+import { logoutUser } from "../auth/logout.mjs";
+import { setupPostSearch } from '../search/search.mjs';
 
 setupPostSearch('#searchInput', [], () => {});
 
@@ -78,18 +78,19 @@ async function deletePost(postId) {
         },
     });
 
-    if (!response.ok);
-    const json = await response.json();
-    console.error('Failed to delete post:', json);
-    alert('Could not delete the post. Please try again');
-    return;
+    if (!response.ok) {
+      const json = await response.json();
+      console.error('Failed to delete post:', json);
+      alert('Could not delete the post. Please try again');
+      return;
+    }
 
     alert('Post deleted successfully.');
-    window.location.href = 'posts/feed.html';
-   }catch (error) {
-    console.error('Error deleting post:',error);
+    window.location.href = '/posts/feed.html';
+  } catch (error) {
+    console.error('Error deleting post:', error);
     alert('An error occurred. Please try again');
-   }
+  }
 }
 
 function renderSinglePost(post) {
@@ -121,6 +122,13 @@ function renderSinglePost(post) {
     author.classList.add('post-author');
     const authorName = post?.author?.name || post?.author?.username || 'Unknown Author';
     author.textContent = `By ${authorName}`;
+
+    if (authorName !== ' Unkown Author') {
+        author.classList.add('post-author--clickable');
+        author.addEventListener('click', () => {
+            window.location.href = `/posts/author.html?name=${encodeURIComponent(authorName)}`;
+        });
+    }
 
     const body = document.createElement('p');
     body.classList.add('post-body');

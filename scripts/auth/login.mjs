@@ -21,16 +21,17 @@ async function loginUser(userDetails) {
 
     if (!response.ok) {
       const message =
-      json?.errors?.[0]?.message || 'Could not login user';
-      json?.message ||
-      'Login failed';
+        json?.errors?.[0]?.message || 'Could not login user';
+        json?.message ||
+        'Login failed';
+
       console.error('Login error:', message);
       alert(message);
       return;
     }
 
 
-    const accessToken = json?.data?.accessToken;
+    const { accessToken, name, email } = json?.data || {};
 
     if (!accessToken) {
       console.error('No access token in response:', json);
@@ -40,6 +41,17 @@ async function loginUser(userDetails) {
 
 
     addToLocalStorage('accessToken', accessToken);
+
+    if (name) {
+      addToLocalStorage('userName', name);
+    } else {
+      console.warn('No "name" field in login response data');
+    }
+
+    if (email) {
+      addToLocalStorage('userEmail', email);
+    }
+
     window.location.href = '../posts/feed.html';
 
   } catch (error) {
