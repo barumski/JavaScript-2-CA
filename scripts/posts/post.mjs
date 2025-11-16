@@ -31,6 +31,17 @@ if (!id) {
     throw new Error('Missing ?id= in URL');
 }
 
+/**
+ * Fetches a single post by id from the Noroff API.
+ * 
+ * Requests author data together with the post by using the `_author=true` flag.
+ * 
+ * @async
+ * @param {number|string} postId - The id of the post to fetch. 
+ * @returns {Promise<Object|null} Resolves to the post object,
+ * or null if the request fails.
+ */
+
 async function fetchSinglePost(postId) {
     try {
         const url = `${POSTS_URL}/${encodeURIComponent(postId)}?_author=true`;
@@ -92,6 +103,15 @@ async function deletePost(postId) {
     alert('An error occurred. Please try again');
   }
 }
+
+/**
+ * Renders a single post view into the singlePostContainer element.
+ * 
+ * Displays media, title, author, body and optionally edit/delete/follow/ controls
+ * depending on the current user.
+ * 
+ * @param {Objet|null} post - Post object returned from the API. 
+ */
 
 function renderSinglePost(post) {
     if (!container) {

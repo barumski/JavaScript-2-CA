@@ -1,3 +1,14 @@
+  /**
+   * Sets up client-side search for posts based on title and author name.
+   * 
+   * Listens to input events on the given search field and calls the callback
+   * with filtered array of posts.
+   * 
+   * @param {string} searchInputSelector - CSS selector for the search input element.
+   * @param {object[]} allPosts - The full list of posts that can be searched.
+   * @param {(filteredPosts: Object[]) => void} onResult - Callback called with the filtered posts.
+   */
+
 export function setupPostSearch(searchInputSelector, allPosts, onResult) {
     const searchInput = document.querySelector(searchInputSelector);
     const clearBtn = document.querySelector('#clearSearch');

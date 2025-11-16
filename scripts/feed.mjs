@@ -41,6 +41,15 @@ logoutUser({
   clearAll: false,
 });
 
+/**
+ * Fetches a list of social posts from the Noroff API.
+ * 
+ * Adds the authenticated user's access token and API key as headers.
+ * 
+ * @async 
+ * @returns {Promise<Object[]} Resolves th an array of post objects.
+ * Returns an empty array if the request fails or the user is not authenticated. 
+ */
 
 async function fetchPosts() {
   try {
@@ -127,6 +136,18 @@ function filterPostsForYou(posts, followingProfiles) {
     return followedNames.has(authorName);
   });
 }
+
+/**
+ * Renders a list of posts into the feed grid container.
+ * 
+ * Each post is turned into a clickable card that links to the single post page.
+ * 
+ * @param {Object[]} [posts=[]] - Array of post objects returned from the API.
+ * @param {*} posts[].id - Unique id of the post. 
+ * @param {*} [posts[].title] - Title of the post. 
+ * @param {*} [posts[].media] - Optional media object with url/alt.
+ * @param {*} [posts[].author] - Optional author object with name/username.   
+ */
 
 function generatePosts(posts = []) {
   displayContainer.textContent = '';
@@ -231,7 +252,6 @@ async function main() {
 
 
   generatePosts(allPosts);
-
 
   setupPostSearch('#searchInput', allPosts, (filteredPosts) => {
     generatePosts(filteredPosts);
