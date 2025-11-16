@@ -53,13 +53,13 @@ function onCreateFormSubmit(event) {
 
     const formData = new FormData(form);
     const title = formData.get('title')?.toString().trim() || '';
-    const body = formData.get('body')?.toString().trim || '';
+    const body = formData.get('body')?.toString().trim() || ''; 
     const mediaUrl = formData.get('mediaUrl')?.toString().trim() || '';
     const mediaAlt = formData.get('mediaAlt')?.toString().trim() || '';
 
     if (!title) {
         message.textContent = 'Title is required';
-        message.computedStyleMap.color = 'red';
+        message.computedStyleMap.color = 'var(--primary-color';
         return;
     }
 
@@ -76,21 +76,16 @@ function onCreateFormSubmit(event) {
     }
 
     message.textContent = 'Publishing post...';
-    message.computedStyleMap.color = 'inherit';
+    message.style.color = 'var(--primary-color';
 
     createPost(postPayload)
     .then((createdPost) => {
-        console.log('Post created:', createPost);
-        message.textContent = 'Post created successfully! Redirecting to feed...';
-        message.computedStyleMap.color = 'green';
-
-        setTimeout(() => {
-            window.location.href = '/posts/feed.html';
-        }, 800);
-    })
+    console.log('Post created:', createdPost);
+    window.location.href = '/posts/feed.html';
+})
     .catch((error) => {
         message.textContent = error.message || 'Something went wrong';
-        message.style.color = 'red';
+        message.style.color = 'var(--primary-color';
     });
 }
 

@@ -50,25 +50,25 @@
 
         <section class="edit-section">
             <h1>Edit post</h1>
-            <form id="editPostForm" class="post-form">
+            <form id="editPostForm" class="edit-form">
                 <label>
                     Title
-                    <input type="text" name="title" required>
+                    <input type="text" name="title" class="title" required>
                 </label>
 
                 <label>
                     Body
-                    <textarea type="body" rows="6"></textarea>
+                    <textarea type="body" rows="6" class="textarea"></textarea>
                 </label>
 
                 <label>
                     Image URL
-                    <input type="url" name="mediaUrl" placeholder="https://example.com/image.jpg">
+                    <input type="url" name="mediaUrl" class="url" placeholder="https://example.com/image.jpg">
                 </label>
 
                 <label>
                     Image alt text
-                    <input type="text" name="mediaAlt" placeholder="Describe the image">
+                    <input type="text" name="mediaAlt" class="alt" placeholder="Describe the image">
                 </label>
 
                 <button type="submit" class="btn-edit">
