@@ -1,9 +1,10 @@
-import { NOROFF_API_KEY, POSTS_URL } from './api/api.mjs';
+import { NOROFF_API_KEY, POSTS_URL, PROFILES_URL } from './api/api.mjs';
 import { getFromLocalStorage } from './utilities.mjs';
 import { logoutUser } from './auth/logout.mjs';
 import { setupPostSearch } from './search/search.mjs';
 
 let allPosts = [];
+let followingProfiles = [];
 
 function normalizeMediaUrl(url) {
   if (!url || typeof url !== 'string') return url;
@@ -27,6 +28,7 @@ function normalizeMediaUrl(url) {
 const displayContainer = document.getElementById('displayContainer');
 
 const accessToken = getFromLocalStorage('accessToken');
+const currentUser = getFromLocalStorage('userName');
 
 if (!accessToken) {
   console.warn('No access token found, redirecting to login page.');
@@ -76,6 +78,54 @@ async function fetchPosts() {
     console.error('Error fetching posts:', error);
     return [];
   }
+}
+
+async function fetchFollowingProfiles() {
+  if (!currentUser) {
+    console.warn('No currentUser found, cannot fetch following');
+    return [];
+  }
+
+
+  try {
+    const response = await fetch(
+      `${PROFILES_URL}/${encodeURIComponent(currentUser)}?_following=true`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'X-Noroff-API-Key': NOROFF_API_KEY,
+        },
+      }
+    );
+
+        const json = await response.json();
+
+    if (!response.ok) {
+      console.error('Failed to fetch following profiles:', json);
+      return [];
+    }
+    return json.data?.following || [];
+  } catch (error) {
+    console.error('Error fetching following profiles:', error);
+    return [];
+  }
+}
+
+function filterPostsForYou(posts, followingProfiles) {
+  if (!Array.isArray(posts) || posts.length === 0) return [];
+  if (!Array.isArray(followingProfiles) || followingProfiles.length === 0) return [];
+
+    const followedNames = new Set(
+    followingProfiles
+      .map((profile) => profile.name || profile.username)
+      .filter(Boolean)
+  );
+
+    return posts.filter((post) => {
+    const authorName = post?.author?.name || post?.author?.username;
+    if (!authorName) return false;
+    return followedNames.has(authorName);
+  });
 }
 
 function generatePosts(posts = []) {
@@ -135,40 +185,60 @@ function generatePosts(posts = []) {
   }
 }
 
-async function main() {
-  const posts = await fetchPosts();
-  allPosts = posts;
+function setupFilterButtons() {
+  const allPostsBtn = document.getElementById('allPostsBtn');
+  const forYouBtn = document.getElementById('forYouBtn');
 
-  const params = new URLSearchParams(window.location.search);
-  const urlQuery = params.get('search');
+  if (!allPostsBtn || !forYouBtn) {
+    console.warn('Filter buttons not found in DOM');
+    return;
+  }
 
-  if (urlQuery) {
-    const lower = urlQuery.toLowerCase();
+  const setActive = (activeBtn) => {
+    allPostsBtn.classList.remove('active');
+    forYouBtn.classList.remove('active');
+    activeBtn.classList.add('active');
+  };
 
-    const filtered = allPosts.filter((post) => {
-      const title = (post?.title || '').toLowerCase();
-      const authorName = (
-        post?.author?.name ||
-        post?.author?.username ||
-        ''
-      ).toLowerCase();
+  allPostsBtn.addEventListener('click', () => {
+    setActive(allPostsBtn);
+    generatePosts(allPosts);
+  });
 
-      return title.includes(lower) || authorName.includes(lower);
-    });
+  forYouBtn.addEventListener('click', () => {
+    setActive(forYouBtn);
 
-    const searchInput = document.querySelector('#searchInput');
-    if (searchInput) {
-      searchInput.value = urlQuery;
+    const forYouPosts = filterPostsForYou(allPosts, followingProfiles);
+
+    if (!forYouPosts.length) {
+      displayContainer.textContent =
+        'No posts from profiles you follow yet.';
+      return;
     }
 
-    generatePosts(allPosts); 
-  } else {
-    generatePosts(allPosts);
-  }
-  
-  setupPostSearch("#searchInput", allPosts, (filteredPosts) => {
+    generatePosts(forYouPosts);
+  });
+}
+
+async function main() {
+  const [posts, following] = await Promise.all([
+    fetchPosts(),
+    fetchFollowingProfiles(),
+  ]);
+
+  allPosts = posts || [];
+  followingProfiles = following || [];
+
+
+  generatePosts(allPosts);
+
+
+  setupPostSearch('#searchInput', allPosts, (filteredPosts) => {
     generatePosts(filteredPosts);
   });
+
+
+  setupFilterButtons();
 }
 
 main();

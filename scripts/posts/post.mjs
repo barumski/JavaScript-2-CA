@@ -178,60 +178,76 @@ function renderSinglePost(post) {
   container.append(article);
 }
 
-async function fetchAuthorProfile(authorName) {
-    try {
-        const ult = `${PROFILES_URL}/${encodeURIComponent(authorName)}?_followers=true`;
-        const response = await fetch(url, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'X-Noroff-API-Key': NOROFF_API_KEY,
-            },
-        });
+async function getMyFollowing() {
+  if (!currentUser) {
+    console.warn('No currentUser found, cannot fetch following.');
+    return [];
+  }
 
-        const json = await response.json();
+  try {
+    const response = await fetch(
+      `${PROFILES_URL}/${encodeURIComponent(currentUser)}?_following=true`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'X-Noroff-API-Key': NOROFF_API_KEY,
+        },
+      }
+    );
 
-        if (!response.ok) {
-            console.error('Failed to fetch author profile:', json);
-            return null;
-        }
+    const json = await response.json();
 
-        return json.data;
-    }   catch (error) {
-        console.error('Error fetching author profile:', error);
+    if (!response.ok) {
+      console.error('Failed to fetch my following list:', json);
+      return [];
     }
+
+    return json.data?.following || [];
+  } catch (error) {
+    console.error('Error fetching my following list:', error);
+    return [];
+  }
 }
 
 async function isFollowingAuthor(authorName) {
-    if (!currentUser || !authorName) return false;
+  if (!authorName || !currentUser) return false;
 
-    const profile = await fetchAuthorProfile(authorName);
-    const followers = profile?.followers;
-    if (!Array.isArray(followers)) return false;
+  const following = await getMyFollowing();
 
-    return followers.some((follower) => follower.name === currentUser);
+  if (!Array.isArray(following) || following.length === 0) {
+    return false;
+  }
+
+  const followedNames = new Set(
+    following
+      .map((profile) => profile.name || profile.username)
+      .filter(Boolean)
+  );
+
+  return followedNames.has(authorName);
 }
 
 function setupFollowButton(button, authorName) {
-    if (!authorName || !currentUser || authorName === currentUser) {
-        button.style.display = 'none';
-        return;
-    }
+  if (!authorName || !currentUser || authorName === currentUser) {
+    button.style.display = 'none';
+    return;
+  }
 
-    let isFollowing = false;
+  let isFollowing = false;
 
-    const updateLabel = () => {
-        button.textContent = isFollowing ? 'Unfollow' : 'Follow';
-    };
+  const updateLabel = () => {
+    button.textContent = isFollowing ? 'Unfollow' : 'Follow';
+  };
 
-    const init = async () => {
-        button.disabled = true;
-        button.textContent = '...';
-        isFollowing = await isFollowingAuthor(authorName);
-        updateLabel();
-        button.disabled = false;
-    };
+  const init = async () => {
+    button.disabled = true;
+    button.textContent = '...';
+    isFollowing = await isFollowingAuthor(authorName);
+    updateLabel();
+    button.disabled = false;
+  };
 
-    init();
+  init();
 
   button.addEventListener('click', async () => {
     button.disabled = true;
@@ -247,7 +263,6 @@ function setupFollowButton(button, authorName) {
           'X-Noroff-API-Key': NOROFF_API_KEY,
         },
       });
-
 
       const json = await response.json();
 
