@@ -51,7 +51,7 @@ async function fetchMyProfile() {
             if (response.status === 401 || response.status === 403) {
                 localStorage.removeItem('accessToken');
                 localStorage.removeItem('userName');
-                window.location.href = '/login.html';
+                window.location.href = '../login.html';
             }
 
             return null;
@@ -145,7 +145,7 @@ function renderProfilePosts(posts = []) {
         const post = posts[i];
 
         const link = document.createElement('a');
-        link.href = `/posts/post.html?id=${post.id}`;
+        link.href = `../posts/post.html?id=${post.id}`;
         link.classList.add('post-link');
 
         const card = document.createElement('article');
@@ -153,7 +153,7 @@ function renderProfilePosts(posts = []) {
 
         const img = document.createElement('img');
         img.classList.add('post-image');
-        img.src = post.media?.url || 'https//via.placeholder.com/600x400?text=No+Image';
+        img.src = post.media?.url || 'https://via.placeholder.com/600x400?text=No+Image';
         img.alt = post.media?.alt || post.title || 'Post image';
 
         const title = document.createElement('h3');

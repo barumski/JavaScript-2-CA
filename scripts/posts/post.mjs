@@ -97,7 +97,7 @@ async function deletePost(postId) {
     }
 
     alert('Post deleted successfully.');
-    window.location.href = '/posts/feed.html';
+    window.location.href = 'feed.html';
   } catch (error) {
     console.error('Error deleting post:', error);
     alert('An error occurred. Please try again');
@@ -143,10 +143,10 @@ function renderSinglePost(post) {
     const authorName = post?.author?.name || post?.author?.username || 'Unknown Author';
     author.textContent = `By ${authorName}`;
 
-    if (authorName !== ' Unknown Author') {
+    if (authorName !== 'Unknown Author') {
         author.classList.add('post-author--clickable');
         author.addEventListener('click', () => {
-            window.location.href = `/posts/author.html?name=${encodeURIComponent(authorName)}`;
+            window.location.href = `author.html?name=${encodeURIComponent(authorName)}`;
         });
     }
 
@@ -158,13 +158,13 @@ function renderSinglePost(post) {
     actions.classList.add('post-actions');
 
     const backLink = document.createElement('a');
-    backLink.href = '/posts/feed.html';
+    backLink.href = 'feed.html';
     backLink.classList.add('btn-back');
     backLink.textContent = '← Back';
 
     if (isOwner(post)) {
         const editBtn = document.createElement('a');
-        editBtn.href = `/posts/edit.html?id=${post.id}`;
+        editBtn.href = `edit.html?id=${post.id}`;
         editBtn.classList.add('btn', 'btn-edit');
         editBtn.textContent = 'Edit';
 

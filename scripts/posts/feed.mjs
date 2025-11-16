@@ -161,7 +161,7 @@ function generatePosts(posts = []) {
     const post = posts[i];
 
     const link = document.createElement('a');
-    link.href = `/posts/post.html?id=${post.id}`;
+    link.href = `post.html?id=${post.id}`;
     link.classList.add('post-link');
 
     const postContainer = document.createElement('article');

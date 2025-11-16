@@ -81,7 +81,7 @@ function renderAuthorPosts(posts = []) {
         const post = posts[i];
 
         const link = document.createElement('a');
-        link.href = `/posts/post.html?id=${post.id}`;
+        link.href = `post.html?id=${post.id}`;
         link.classList.add('post-link');
 
         const card = document.createElement('article');

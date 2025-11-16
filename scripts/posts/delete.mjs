@@ -1,12 +1,12 @@
-import { NOROFF_API_KEY, POSTS_URL } from "./api/api.mjs";
-import { getFromLocalStorage } from "./utilities.mjs";
+import { NOROFF_API_KEY, POSTS_URL } from "../api/api.mjs";
+import { getFromLocalStorage } from ".utilities.mjs";
 
 export async function deletePost(postId) {
     const accessToken = getFromLocalStorage("accessToken");
 
     if (!accessToken) {
         alert("You are not logged in.");
-        window.location.href = "/login.html";
+        window.location.href = "../login.html";
         return;
     }
 
@@ -30,7 +30,7 @@ export async function deletePost(postId) {
         }
 
         alert("Post successfully deleted");
-        window.location.href = "/posts/feed.html"; 
+        window.location.href = "feed.html"; 
     }   catch (error) {
         console.error("Error deleting post:", error);
         alert("Could not delete post due to a network error.");

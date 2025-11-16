@@ -16,7 +16,6 @@ if (!accessToken) {
 
 logoutUser({
     selector: '#logout',
-    redirectPath: '../login.html',
     clearAll: false,
 });
 
@@ -81,7 +80,7 @@ function onCreateFormSubmit(event) {
     createPost(postPayload)
     .then((createdPost) => {
     console.log('Post created:', createdPost);
-    window.location.href = '/posts/feed.html';
+    window.location.href = 'feed.html';
 })
     .catch((error) => {
         message.textContent = error.message || 'Something went wrong';

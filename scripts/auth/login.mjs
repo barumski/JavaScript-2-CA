@@ -21,7 +21,7 @@ async function loginUser(userDetails) {
 
     if (!response.ok) {
       const message =
-        json?.errors?.[0]?.message || 'Could not login user';
+        json?.errors?.[0]?.message ||
         json?.message ||
         'Login failed';
 
@@ -52,7 +52,7 @@ async function loginUser(userDetails) {
       addToLocalStorage('userEmail', email);
     }
 
-    window.location.href = '../posts/feed.html';
+    window.location.href = 'posts/feed.html';
 
   } catch (error) {
     console.error('Login exception', error);

@@ -1,6 +1,6 @@
 export function logoutUser({
     selector = '#logout',
-    redirectPath = '../login.html',
+    redirectPath = '../../login.html',
     clearAll = false,
 } = {}) {
     const logoutLink = document.querySelector(selector);
