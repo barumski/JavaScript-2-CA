@@ -1,7 +1,7 @@
-import { NOROFF_API_KEY, POSTS_URL, PROFILES_URL } from './api/api.mjs';
-import { getFromLocalStorage } from './utilities.mjs';
-import { logoutUser } from './auth/logout.mjs';
-import { setupPostSearch } from './search/search.mjs';
+import { NOROFF_API_KEY, POSTS_URL, PROFILES_URL } from '../api/api.mjs';
+import { getFromLocalStorage } from '../utilities.mjs';
+import { logoutUser } from '../auth/logout.mjs';
+import { setupPostSearch } from '../search/search.mjs';
 
 let allPosts = [];
 let followingProfiles = [];
