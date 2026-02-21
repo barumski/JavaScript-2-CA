@@ -12,37 +12,46 @@
   <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../css/header_footer.css"> 
-  <link rel="stylesheet" href="../css/profile.css">
+  <!--<link rel="stylesheet" href="../css/header_footer.css"> 
+  <link rel="stylesheet" href="../css/profile.css">-->
+  <link rel="stylesheet" href="../css/output.css">
 
   <!-- Scripts -->
    <script type="module" src="../scripts/profile.mjs"></script>
 </head>
 
 
-<body>
+<body class="bg-gray-100 font-display">
   
-  <header>
-    <a href="../posts/feed.html">JavaScript 2 CA</a>
-      <div class="header-action">
-        <a href="profile.html">Profile</a>
-        <a href="#" id="logout">Logout</a>
+  <header class="sticky top-0 z-50 bg-zinc-600 text-white">
+      <div class="mx-auto flex max-w-8xl items-center justify-between px-10 py-8">
+        <a href="../posts/feed.html" class="text-xl font-medium tracking-wide drop-shadow-md hover:text-[#3B719F] transition-colors">
+          JavaScript 2 CA
+        </a>
+          <div class="header-action flex items-center gap-4">
+            <a href="profile.html" class="text-xl font-medium tracking-wide drop-shadow-md hover:text-[#3B719F] transition-colors">
+              Profile
+            </a>
+            <a href="#" id="logout" class="text-xl font-medium tracking-wide drop-shadow-md hover:text-[#3B719F] transition-colors">
+              Logout
+            </a>
+          </div>
       </div>
   </header>
 
 
   <main>
-    <section>
-      <nav class="nav-links">
-        <a href="../posts/feed.html">Home</a>
-        <a href="../posts/create.html">Create post</a>
-        <div class="search-wrapper">
+    <section class="sticky top-[92px] z-40 bg-[#c7c1a7] shadow-sm">
+      <nav class="nav-links mx-auto flex max-w-6xl items-center justify-center gap-6 px-4 py-4">
+        <a href="../posts/feed.html" class="text-xl text-[#2D2D2D] font-medium tracking-wide drop-shadow-md hover:text-[#3B719F] transition-colors">Home</a>
+        <a href="../posts/create.html" class="text-xl text-[#2D2D2D] font-medium tracking-wide drop-shadow-md hover:text-[#3B719F] transition-colors">Create post</a>
+        <div class="search-wrapper relative flex items-center">
           <input 
-            class="search-bar" 
+            class="search-bar rounded-xl border bg-white px-3 py-2 pr-12 outline-none focus:ring-2 focus:[#3B719F]" 
             id="searchInput" 
             type="text" 
             placeholder="Search posts...">
-          <button type="button" id="clearSearch" class="clear-search-btn">✕</button> 
+          <button type="button" id="clearSearch" class="clear-search-btn absolute right-2 text-zinc-700 hover:text-black">✕</button> 
         </div>       
       </nav>
     </section>
@@ -67,9 +76,9 @@
         </div>
       </div>
 
-      <section class="profile-posts">
-        <h2>My posts</h2>
-        <div id="profilePostsContainer" class="display-container"></div>
+      <section class="profile-posts mx-auto max-w-6xl px-2 pb-10">
+        <h2 class="text-2xl font-medium text-[#2D2D2D] tracking-normal drop-shadow-md">My posts</h2>
+        <div id="profilePostsContainer" class="display-container grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
       </section>
 
       <div class="profile-back-wrapper">
@@ -79,13 +88,15 @@
   </main>
 
 
-  <footer>
-    <div class="footer-top">
-      <a href="../posts/feed.html">JavaScript 2 CA</a>
-    </div>
+  <footer class="bg-zinc-800 text-white mt-10">
+    <div class="mx-auto flex max-w-8xl items-center justify-between px-10 py-12">
+      <div class="footer-top">
+        <a href="../posts/feed.html" class="text-lg font-semibold tracking-wide hover:text-[#3B719F] transition-colors">JavaScript 2 CA</a>
+      </div>
 
-    <div class="footer-links">
-      2025 JS2CA
+      <div class="footer-links text-sm">
+        2025 JS2CA
+      </div>
     </div>
   </footer>
 </body>

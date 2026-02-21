@@ -12,42 +12,70 @@
   <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="../css/login_register.css">
+  <!--<link rel="stylesheet" href="../css/login_register.css"> --> 
+  <link rel="stylesheet" href="../css/output.css">
 
   <!-- Scripts -->
   <script type="module" src="../scripts/auth/register.mjs"></script>
 </head>
 
 
-<body>
+<body class="bg-gray-100 font-display">
 
-  <main>
+  <main class="min-h-screen flex items-center justify-center px-4 py-12">
+    <div class="register w-full max-w-md">
+      <div class="rounded-2xl bg-white shadow-lg ring-1 ring-slate-200 p-6 sm:p-8">
 
-    <div class="register">
+        <h1 class="text-3xl font-semibold tracking-tight text-zinc-800">Register</h1>
 
-      <h1>Register</h1>
+        <section class="mt-2">
+          <h2 class="text-sm text-zinc-600">
+            Please fill in the form to register
+          </h2>
+        </section>
 
-      <section>
-        <h2>Please fill in the form to register</h2>
-      </section>
+        <div class="register-form-container mt-6">
+          <form id="register-form" class="space-y-4">
+            <label for="name" class="block text-sm font-medium text-zinc-800">Name:</label>
+            <input 
+              name="name" 
+              id="name"
+              placeholder="Username" 
+              class="name w-full rounded-lg border bg-white px-3 py-2 text-zinc-800 shadow-sm outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-900/10"
+              required>
 
-      <div class="register-form-container">
-        <form id="register-form">
-          <label for="name">Name:</label>
-          <input name="name" id="name" class="name" required>
-          <label for="email">Email:</label>
-          <input name="email" id="email" class="email" required>    
-          <label for="password">Password:</label>
-          <input name="password" id="password" class="password" required>
-          <button class="submit-btn">Submit</button>
-        </form>
+            <label for="email" class="block text-sm font-medium text-zinc-800">Email:</label>
+            <input 
+              name="email" 
+              id="email"
+              placeholder="example@email.com" 
+              class="email w-full rounded-lg border bg-white px-3 py-2 text-zinc-800 shadow-sm outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-900/10"
+              required>
+
+            <label for="password" class="block text-sm font-medium text-zinc-800">Password:</label>
+            <input 
+              name="password" 
+              id="password"
+              placeholder="********" 
+              class="password w-full rounded-lg border bg-white px-3 py-2 text-zinc-800 shadow-sm outline-none focus:border-slate-400 focus:ring-2 focus:ring-slate-900/10"
+              required>
+
+            <button class="submit-btn mt-6 w-full rounded-lg bg-slate-900 px-4 py-2.5 text-m font-medium text-white shadow-sm hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900/20 active:-translate-y-px">
+              Submit
+            </button>
+          </form>
+        </div>
+
+        <section class="mt-6">
+          <p class="text-center text-m text-zinc-600">
+            Already have an account?
+            <a 
+            class="font-medium text-zinc-800 hover:underline" 
+            href="../login.html">Login here</a>
+          </p>
+        </section>
       </div>
-      <section>
-        <p>Already have an account? <span class="register-link"><a href="../login.html">Login here</a></span></p>
-      </section>
     </div>
-  </main>
-
-  
+  </main>  
 </body>
 </html>
