@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap");
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+
+/* POST GRID CARD */    
+    .post-card {
+        @apply overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-slate-200 
+        transition duration-200 ease-out transform 
+        hover:-translate-y-1 hover:shadow-lg hover:ring-2 hover:ring-[#2D2D2D];
+    }
+
+    .post-image {
+        @apply h-60 w-full object-cover object-center;
+    }
+
+    .post-title {
+        @apply p-4 pb-1 text-base font-semibold text-[#2D2D2D] line-clamp-1;
+    }
+
+    .post-author {
+        @apply px-4 pb-4 text-sm text-zinc-600;
+    }
+
+    .to-top {
+        @apply fixed bottom-8 right-8 flex h-12 w-12 items-center justify-center
+        rounded-full bg-zinc-800 text-white shadow-md
+        cursor-pointer opacity-0 invisible
+        transition duration-300 ease-out
+        hover:bg-[#3B719F] hover:-translate-y-1 z-[1000];
+    }
+
+    .to-top::before {
+        content: "↑";
+        @apply text-2xl font-semibold relative -top-[1px];
+    }
+
+    .to-top.show {
+        @apply opacity-100 visible translate-y-0;
+    }
+
+/* PROFILE WRAPPER */
+
+    .profile-section {
+        @apply mx-auto max-w-6xl px-2 pt-8 pb-10;
+    }
+
+    .profile-section > h1 {
+        @apply text-center text-3xl font-semibold tracking-tight text-[#2D2D2D] drop-shadow-sm;
+    }
+
+/* PROFILE CARD */
+
+    .profile-card {
+        @apply mt-6 mb-10 flex flex-col gap-6 items-start
+        rounded-2xl bg-white p-6 shadow-md ring-1 ring-slate-200
+        sm:flex-row sm:items-center sm:p-8;
+    }
+
+    .profile-avatar {
+        @apply h-36 w-36 rounded-full object-cover
+        ring-2 ring-[#2D2D2D] bg-zinc-900;
+    }
+
+    .profile-info h2{
+        @apply text-2xl font-semibold text-[#2D2D2D];
+    }
+
+    .profile-email {
+        @apply mt-1 text-sm text-[#2D2D2D];
+    }
+
+    .profile-bio {
+        @apply mt-4 text-sm text-[#2D2D2D]; 
+    }
+
+    .profile-bio {
+        @apply mt-4 text-base text-[#2D2D2D];
+    }
+
+    .profile-stats {
+        @apply mt-4 flex flex-wrap gap-3;
+    }
+
+    .profile-stats span {
+        @apply rounded-full bg-zinc-800 px-3 py-1 text-sm text-white;
+    }
+
+    .profile-posts {
+        @apply mt-6;
+    }
+
+    .profile-posts h2 {
+        @apply mb-4;
+    }
+
+/* BACK LINK */
+
+    .profile-back-wrapper {
+        @apply mt-10 flex justify-center;
+    }
+
+    .btn-back {
+        @apply inline-flex items-center rounded-xl bg-white px-4 py-2 text-medium font-medium
+        text-zinc-800 ring-1 ring-zinc-800 transition-colors
+        hover:bg-zinc-800 hover:text-white;
+    }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "javascript-2-ca",
+  "version": "1.0.0",
+  "description": "This project id my delivery for the JavaScript 2 Course Assignment at Noroff.\r It is a small social media client that connects to the Noroff social API and allows a registered user to log in, \r create posts and interact with content",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./css/input.css -o ./css/output.css --watch",
+    "build": "npx tailwindcss -i css/input.css -o css/output.css --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barumski/JavaScript-2-CA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/barumski/JavaScript-2-CA/issues"
+  },
+  "homepage": "https://github.com/barumski/JavaScript-2-CA#readme",
+  "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "autoprefixer": "^10.4.24",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19"
+  }
+}
